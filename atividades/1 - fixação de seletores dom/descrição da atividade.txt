@@ -1,0 +1,3 @@
+Nessa atividade apliquei estilizações e retornei no console o conteudo de tags ou classes utilizando o DOM.
+
+Usei tbm o conceito de percorrer listas através de um indice e tbm utilizando for item of list

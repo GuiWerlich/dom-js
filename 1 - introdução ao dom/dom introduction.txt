@@ -1,0 +1,107 @@
+DOM - DOCUMENT OBJECT MODEL
+
+acessar elementos html atraves do navegador por meio de um objeto.
+navegador é o inicio da árvore DOM
+
+ex:
+para acessar o navegador será usado o objeto window
+para acessar as informações ma pagina (html) eu acesso um atributo desse objeto: window.document 
+para acessar o estilo da pagina o atributp é window.document.body.style
+
+ex pratico:
+se eu for no console no meu navegador e passar:
+
+- window.location.href - ele irá trazer a url do site
+
+- window.document.write("olá mundo") ele vai escrever isso no documento acessando os atributos do objeto para isso.
+
+- window.document.body.style = "background: #0ff": troca o background color o site
+
+- document.title = "H4CK34D0" - muda o titulo da pagina
+
+
+OBS: para acessar o document eu não preciso passar o "window" antes visto que como é acessado com muita frequencia o js ja reconhece isso!
+
+--------------------------
+através do JS com o script podemos criar funções para que ao ser realizado certo comando a estilização da pagina mude.
+
+ex:
+
+const option = prompt("Você deseja ativar o modo escuro do site??")
+
+if (option === "sim") {
+    window.document.body.style = "background: #000000"
+} else if (option === "não") {
+    window.document.body.style = "background: #000000"
+    alert("LARGUE DE SER PSICOPATA E USO O MODO ESCURO")
+}
+
+-----------------------------------------
+SELETORES DOM
+
+utilizando os conceitos que foram aprendidos acima, o javascript possui funções seletoras, que nos permitem encontrar um elemento na pagina e alterar sua estilização, semelhante ao que ja foi feito em css.
+
+os mais utilizados são:
+
+getElementById - retorna um único elemento através do ID especificado
+getElementByClassName - permite selecionar elementos que possuem a mesma classe (Se quero retornar todos usar o getElements no plural)
+getElementByTagName - permite selecionar elementos que possuem a mesma tag (ex: div, section, etc. Se quero retornar todos usar o getElements no plural)
+querySelector - retorna o primeiro elemento que corresponde ao seletor css especificado
+querySelectorAll - retorna todos os elementos que corresponde ao seletor css especificado
+
+-----------------------------
+CRIAÇÃO DE ELEMENTOS HTML COM DOM
+
+é possível também usando o dom para criar elementos html e também construir a hierarquia de cada uma das tags.
+
+ex:
+
+quero cirar um article que possui um titulo (h2), um paragrafo (p) e um botão (button)
+
+o resultado que se espera é esse:
+
+<article>
+  <h2>Como criar elementos HTML de forma dinâmica, utilizando Javascript</h2>
+  <p>Nesse post vamos aprender como criar elementos utilizando o DOM</p>
+  <button>Acessar conteúdo</button>
+</article>
+
+- Para criar elementos podemos utilizar o método createElement() que recebe como parametro uma string informando o nome da nossa Tag HTML.
+    ex:
+    const article = document.createElement("article");
+    const articleTitle = document.createElement("h2");
+    const articleResume = document.createElement("p");
+    const articleButton = document.createElement("button");
+
+    obs: a ordem das tags não fazer diferença nenhuma aqui, pois para aninha-las usaremos outro método
+
+- Para inserir um conteúdo dentro das tags utilizamos a propriedade innerText, que também deve ser passado em forma de string:
+    ex:
+    article.innerText = "Estou criando um conteúdo para meu article"
+
+- Após os conteúdos serem definidos chegou a hora de definir as hierarquias das tags; Para defini-las usandos o método appendChild(). No meu caso, a tag article é a tag pai, e as demais são tags filhas.
+   
+    ex: 
+    article.appendChild(articleTitle);
+    article.appendChild(articleResume);
+    article.appendChild(articleButton);
+
+OBS: aqui sim a ordem das tags importa, pois para que a estrutura fique como esperada devemos deixa-la nessa sequencia que foi demosntrada no exemplo.
+
+- Ao final disso tudo ainda não temos nada sendo mostrado no navegador, isso por que precisamos anexar o article ao body. Dessa forma usamos a mesmo conceito que aplicamos acima:
+    ex:
+    const body = document.querySelector("body"); -- atribui o body do nosso documento dentro de uma variavel com o mesmo nome
+
+    body.appendChild(article); -- recebe nosso conteudo criado da tag article
+
+----------------
+    
+MANIPULAÇÃO DE CLASSES COM CSS 
+
+Anteriormente estavamos aplicando a estilização dos estilos css diretamente no codigo js. Porém para manter a organização do nosso codigo vamos criar esses estilos por meio do DOM para aplicar estilos pré definidos.
+
+Para que isso seja possivel utilizamos uma propriedade chamada classList, que nos permite criar, remover e avaliar se existe uma classe dentro de um elemento que esta sendo acessado pelo DOM.
+
+vide manipulação 
+
+

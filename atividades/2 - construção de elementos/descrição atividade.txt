@@ -1,0 +1,4 @@
+nessa atividade existia uma lista de objetos de produtos, que tinham as propriedade nome e preço.
+
+Através de um loop for foi possivel "automatizar" a leitura desses itens da lista e renderiza-los individualmente na pagina.
+
