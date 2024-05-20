@@ -1,0 +1,82 @@
+INTRODUÇÃO A EVENTOS
+
+Um evento é uma ação ou movimento que acontece em uma pagina. Os eventos ocorrem a todo momento.
+ex: clique, rolagem de scroll ou até uma ação propria do window/document, como o carregamento da pagina.
+
+os eventos permitem responder interações do usuário, como cliques do mouse, pressionar teclas, movimentos do mouse e outros eventos relacionados com a experiencia do usuário.
+
+-------
+INTERCEPTAÇÃO DE EVENTOS
+
+A maioria dos eventos estão relacionadas com elementos html (botões, links, caixas de texto, imagens, etc). Podemos atribuir manipuladores de eventos a esses elementos para controlar o comportamente quando ele ocorre;
+
+Para que possamos intercepta-los precisamos do elemento html capturado pelo DOM:
+
+// index.js
+// Capturando o elemento button do nosso html
+const button = document.querySelector("button");
+
+
+Existe uma função JS propria para manipular os eventos depois de capturados, chamado de addEventListener, que como o próprio nome ja diz, ele "escuta" o evento e determina o comportamento conforme o que definimos.
+
+essa função recebe dois parametros: uma string que define o tipo de evento que será "escutado" e o segundo é uma função callback que definirá qual o comportamento esperado.
+
+// index.js
+button.addEventListener("click", function () {
+  console.log("hello world");
+});
+
+existem vários tipos de eventos em js, como eventos de mouse (clique, duplo clique e movimentos), eventos de teclado(pressionamento de teclas), eventos de formulário (envio de formulário), evento de carregamento de pagina (load e DOMContentLoaded), eventos de temporizador (como setTimeout e setInterval)
+
+porém existe aquele que são os principais a serem utilizados:
+
+* click, dbclick - clique ou duplo clique do mouse;
+* mouseover - passar o mouse sobre o elemento;
+* focus, blur - elemento recebe foco ou desfoque quando clica em algum elemento (ex: um campo de formulário);
+* submit - envio de um formulário;
+* keydown, keyup - disparado quando uma tecla é pressionada e quando for solta;
+* DOMContentLoaded - disparado quando o documento é completamente carregado;
+unload- quando uma pagina é fechada.
+---------------------------------
+BUBBLING E CAPTURING
+
+Quando um evento é acionado nem sempre ele é imediatamente acionado.
+existem duas fases que determinam quando o evento será tratado de fato.
+
+CAPTURING
+
+Nessa fase o navegador verifica se existe algum handler para o evento ocorrido a partir do root da pagina, ou seja, ele inicia uma leitura desde a tag <html> e passando por todos os filhos imediatos até chegar no evento.
+
+BUBBLING
+
+nessa fase acontece o oposto. O navegador coemça verificando a partir do elemento clicado e vai subindo e verificando o pai imediato de cada elemento, até chegar no root da pagina (<html>)
+----------------------------
+PROPRIEDADES DO OBJETO EVENTO
+
+o Objeto Evento possui diversas propriedades, como por exemplo, o tipo de evento ocorrido.
+
+Os mais comuns a serem utilizados é o target e currentTarget.
+
+* Target - é a propriedade que guarda o elemento que disparou o evento (ex: onde ocorreu um clique). Ou seja, é onde o eveto iniciou.
+* currentTarget - é quem guarda o elemento que possui o event listener (o "manipulador" do evento), é o elemento que chamou o métodos addEventListener.
+
+só é possivel utilizar o currentTarget quando o evento está sendo interceptado, caso contario ele será exibido sempre como null.
+Para visualiza-lo é possivel usar o console.log(event.currentTarget)
+-------------------
+MÉTODOS DO OBJETO EVENTO
+
+* preventDefault() - para que seja possivel entender a proposta desse método precisamos conhecer mais sobre "Ações Padrão do Navegador"
+
+O navegador por padrão sempre intercepta vários eventos que ocorrem, como por exemplo clicar em um link (que inicia a pagina atravs da url), o clique em um botão de um formulário para envia-lo a um servidor, clicar e arrastar o mouse em cima de um texto, fazendo que com que aquele texto seja selecionado.
+
+As vezes é necessário executar uma função diferente do padrão do navegador para que tal ação não seja executada. E nesse momento o preventDefault() que literalmente diz para "previnir o padrão"
+
+obs: vide button.html  (ao adicionar o preventListener() a pagina não é mais redirecionada)
+
+* stopPropagation() - significa literalmente parar a propagação. Nesse caso ele deixa de propagar para os demais elementos, ou seja impede que o bu ou o CAPTURING ocorra. 
+Diferente do PreventDefault ele não impede as ações padrão do navegador.
+
+esse método é util quando é necessário interceptar o mesmo evento em dois elementos com relação de pai e filho, porém adicionando funções diferentes em cada um.
+
+--------------------------------------
+
